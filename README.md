@@ -16,12 +16,13 @@
 
 ### Commit 규칙
 
-- feature: 신규 기능 추가
+- feat: 신규 기능 추가
 - rename: 주석, 변수, 클래스명 등 수정
 - refactor: 코드 리팩토링
 - fix: 버그 수정
 - hotfix: 긴급 수정
 - docs: 문서 수정
+- merge: merge작업에서 커밋이 필요한 경우
 - chore: 빌드 업무 수정 및 그 외
 
 ---
