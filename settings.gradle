@@ -1,1 +1,6 @@
 rootProject.name = 'theme-explorer'
+include 'explorer-common'
+include 'explorer-domain'
+include 'explorer-infra'
+include 'explorer-external-api'
+
