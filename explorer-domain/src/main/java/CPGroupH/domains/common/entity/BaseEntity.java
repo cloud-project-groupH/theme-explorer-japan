@@ -1,4 +1,4 @@
-package CPGroupH.common.entity;
+package CPGroupH.domains.common.entity;
 
 import jakarta.persistence.EntityListeners;
 import java.time.LocalDateTime;
