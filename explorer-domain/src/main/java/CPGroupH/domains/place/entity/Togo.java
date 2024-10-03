@@ -1,6 +1,7 @@
 package CPGroupH.domains.place.entity;
 
 import CPGroupH.common.enums.PlaceStatus;
+import CPGroupH.domains.common.entity.BaseEntity;
 import CPGroupH.domains.member.entity.Member;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
         @UniqueConstraint(name = "uc_togo",columnNames = {"member_id", "place_id"})
 }
 )
-public class Togo extends Place {
+public class Togo extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
