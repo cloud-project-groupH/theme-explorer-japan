@@ -7,6 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -27,4 +28,11 @@ public class Address extends BaseEntity {
 
     @Column(nullable = false)
     private String street;
+
+    @Builder
+    public Address(String city, String district, String street) {
+        this.city = city;
+        this.district = district;
+        this.street = street;
+    }
 }
