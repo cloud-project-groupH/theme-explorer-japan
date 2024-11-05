@@ -8,3 +8,18 @@ jwt:
   allowance:
     secret: e20b675a52da5aa6d3d181dc69614e38d13ed80fd88c162cdd93047c566cd805
     expires-in: 900
+
+cookie:
+  expiration: 3600
+  domain: localhost
+  max-age: 300
+  access-name: ac_t
+  refresh-name: rf_t
+
+frontend:
+  auth-redirect-url: http://localhost:3000/loading
+  base-url: http://localhost:3000
+  allowance-redirect-url: http://localhost:3000/login/term
+
+backend:
+  base-url: http://localhost:8080
