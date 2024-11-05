@@ -23,7 +23,10 @@ public enum AuthErrorCode implements ErrorCode {
     UNSUPPORTED_TOKEN(HttpStatus.BAD_REQUEST, "AUTH-009", "토큰의 특정 헤더나 클레임이 지원되지 않습니다."),
 
     REFRESH_TOKEN_NOT_FOUND(HttpStatus.UNAUTHORIZED, "AUTH-010", "쿠키에 리프레시 토큰이 없습니다."),
-    ACCESS_TOKEN_NOT_FOUND(HttpStatus.UNAUTHORIZED, "AUTH-011", "요청 헤더에 엑세스 토큰이 없습니다.");
+    ACCESS_TOKEN_NOT_FOUND(HttpStatus.UNAUTHORIZED, "AUTH-011", "요청 헤더에 엑세스 토큰이 없습니다."),
+
+    //권한 에러
+    USER_NOT_EXIST(HttpStatus.UNAUTHORIZED, "AUTH_012", "가입한 사용자가 존재하지 않습니다.");
 
     private final HttpStatus httpStatus;
     private final String code;
