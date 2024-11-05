@@ -56,5 +56,9 @@ public class Member extends BaseEntity {
     public void onDelete() {
         this.deletedAt = LocalDateTime.now();
     }
+
+    public void updateAllowance() {
+        this.allowance = true;
+    }
 }
 
