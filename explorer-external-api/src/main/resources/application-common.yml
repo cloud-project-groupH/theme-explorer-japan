@@ -1,0 +1,25 @@
+jwt:
+  access:
+    secret: 8ed3d8a1f74cf6ba0815e9c58e87d708973907f5218a052ac57e5b3cb13d074b
+    expires-in: 7200
+  refresh:
+    secret: d483f13b53ffb4b4ca45156ea0ffdf32e4cabd4a901556d69d7355ba1f548d52
+    expires-in: 604800
+  allowance:
+    secret: e20b675a52da5aa6d3d181dc69614e38d13ed80fd88c162cdd93047c566cd805
+    expires-in: 900
+
+cookie:
+  expiration: 3600
+  domain: localhost
+  max-age: 300
+  access-name: ac_t
+  refresh-name: rf_t
+
+frontend:
+  auth-redirect-url: http://localhost:3000/loading
+  base-url: http://localhost:3000
+  allowance-redirect-url: http://localhost:3000/login/term
+
+backend:
+  base-url: http://localhost:8080

@@ -27,10 +27,14 @@ public class Member extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String nickname;
+
     @Column(nullable = false, length = 255)
     private String email;
 
-    private String profileUrl;
+    private String profileImage;
+
+    private Boolean allowance;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -40,15 +44,21 @@ public class Member extends BaseEntity {
     private LocalDateTime deletedAt;
 
     @Builder
-    public Member(String email, String profileUrl, MemberRole role) {
+    public Member(String nickname, String email, String profileImage, Boolean allowance, MemberRole role) {
+        this.nickname = nickname;
         this.email = email;
-        this.profileUrl = profileUrl;
+        this.profileImage = profileImage;
+        this.allowance = allowance;
         this.role = role;
     }
 
     @PreRemove
     public void onDelete() {
         this.deletedAt = LocalDateTime.now();
+    }
+
+    public void updateAllowance() {
+        this.allowance = true;
     }
 }
 

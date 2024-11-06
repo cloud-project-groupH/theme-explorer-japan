@@ -10,7 +10,7 @@ public record MemberResDTO(Long id, String email, String profileUrl, MemberRole 
         return new MemberResDTO(
                 member.getId(),
                 member.getEmail(),
-                member.getProfileUrl(),
+                member.getProfileImage(),
                 member.getRole(),
                 member.getDeletedAt()
         );
@@ -19,7 +19,7 @@ public record MemberResDTO(Long id, String email, String profileUrl, MemberRole 
     public Member toEntity() {
         return Member.builder()
                 .email(this.email)
-                .profileUrl(this.profileUrl)
+                .profileImage(this.profileUrl)
                 .role(this.role)
                 .build();
     }
