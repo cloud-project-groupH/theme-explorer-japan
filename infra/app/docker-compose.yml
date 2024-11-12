@@ -1,0 +1,12 @@
+services:
+  app:
+    image: seol7/isshonigo-server
+    container_name: isshonigo-app
+    ports:
+      - "8080:8080"
+    networks:
+      - isshonigo-network
+
+networks:
+  isshonigo-network:
+    external: true
