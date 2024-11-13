@@ -8,6 +8,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -29,11 +30,11 @@ public class Preference extends BaseEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @Column(nullable = false)
+    @JoinColumn(name = "category_id", nullable = false)
     private Category category;
 
     @Builder
