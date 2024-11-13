@@ -10,16 +10,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CookieService {
-    @Value("${cookie.max-age")
+    @Value("${cookie.max-age}")
     private int maxAge;
 
-    @Value("${cookie.domain")
+    @Value("${cookie.domain}")
     private String domain;
 
-    @Value("${cookie.access-name")
+    @Value("${cookie.access-name}")
     private String accessName;
 
-    @Value("${cookie.refresh-name")
+    @Value("${cookie.refresh-name}")
     private String refreshName;
 
     private Cookie createTokenCookie(String cookieName, String cookie){
