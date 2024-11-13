@@ -1,0 +1,14 @@
+services:
+  app:
+    image: seol7/isshonigo-server:latest
+    container_name: isshonigo-server
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+    networks:
+      - isshonigo-network
+
+networks:
+  isshonigo-network:
+    external: true

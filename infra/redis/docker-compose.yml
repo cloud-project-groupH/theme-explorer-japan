@@ -1,0 +1,14 @@
+services:
+  redis:
+    image: redis:7.0.12
+    container_name: isshoniGo-redis
+    ports:
+      - "6380:6379"
+    volumes:
+      - ./isshonigo-data:/data
+    networks:
+      - isshonigo-network
+
+networks:
+  isshonigo-network:
+    external: true

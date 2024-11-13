@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mysql:8.0.34
+    container_name: isshoniGo-mysql
+    environment:
+      MYSQL_DATABASE: grouph
+      MYSQL_ROOT_PASSWORD: cloudproject11
+    volumes:
+      - ./data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+    networks:
+      - isshonigo-network
+
+networks:
+  isshonigo-network:
+    external: true
