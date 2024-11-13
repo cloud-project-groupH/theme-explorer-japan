@@ -6,9 +6,9 @@ services:
       MYSQL_DATABASE: grouph
       MYSQL_ROOT_PASSWORD: cloudproject11
     volumes:
-      - ./isshonigo-data:/var/lib/mysql
+      - ./data:/var/lib/mysql
     ports:
-      - "3307:3306"
+      - "3306:3306"
 
     networks:
       - isshonigo-network
