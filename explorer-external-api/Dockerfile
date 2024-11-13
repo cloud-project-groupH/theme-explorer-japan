@@ -9,4 +9,4 @@ COPY ${JAR_FILE} isshonigo-server.jar
 EXPOSE 8080
 
 
-ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "/app/isshonigo-server.jar"]
+ENTRYPOINT ["java", "-jar", "-Duser.timezone=Asia/Seoul", "isshonigo-server.jar"]

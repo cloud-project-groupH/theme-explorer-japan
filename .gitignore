@@ -38,3 +38,9 @@ out/
 
 ### key
 *.pem
+
+### infra data
+/infra/mysql/data
+/infra/mysql/isshonigo-data
+/infra/redis/data
+/infra/redis/isshonigo-data
