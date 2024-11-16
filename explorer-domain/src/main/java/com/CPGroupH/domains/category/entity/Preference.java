@@ -34,7 +34,7 @@ public class Preference extends BaseEntity {
     private Member member;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(name = "subcategory_id", nullable = false)
     private Category category;
 
     @Builder
