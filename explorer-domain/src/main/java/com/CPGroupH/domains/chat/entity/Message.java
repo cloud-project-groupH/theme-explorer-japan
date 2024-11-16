@@ -1,4 +1,4 @@
-package com.CPGroupH.domains.category.entity;
+package com.CPGroupH.domains.chat.entity;
 
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import com.CPGroupH.domains.member.entity.Member;
@@ -10,36 +10,36 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Entity
 @Getter
+@Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "preferences",
-        uniqueConstraints = {
-        @UniqueConstraint(name = "uc_preference", columnNames = {"member_id", "category_id"})
-        })
-public class Preference extends BaseEntity {
+public class Message extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    @JoinColumn(name = "chatroom_id", nullable = false)
+    private ChatRoom chatRoom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subcategory_id", nullable = false)
-    private Category category;
+    @JoinColumn(name = "sender", nullable = false)
+    private Member sender;
+
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String content;
 
     @Builder
-    public Preference(Member member, Category category) {
-        this.member = member;
-        this.category = category;
+    public Message(ChatRoom chatRoom, Member sender, String content) {
+        this.chatRoom = chatRoom;
+        this.sender = sender;
+        this.content = content;
     }
+
 }
