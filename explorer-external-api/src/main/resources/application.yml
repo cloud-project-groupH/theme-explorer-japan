@@ -7,3 +7,16 @@ spring:
       dev:
         - domain-dev
         - common
+    active:
+      local
+
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        web:
+#          socket: DEBUG
+#      apache:
+#        tomcat:
+#          websocket: DEBUG
+
