@@ -1,8 +1,8 @@
 spring:
   data:
     redis:
-      host: localhost
-      port: 6378
+      host: isshonigo-redis
+      port: 6379
       password: isshoni7
       timeout: 2000
 
@@ -14,7 +14,7 @@ spring:
             client-name: kakao
             client-id: 3f60f411225724220d965e0349fa56db
             client-secret: rKPWKpG7EhTCInvm1VIetR94o7fiwIKp
-            redirect-uri: http://localhost:8080/oauth2/kakao
+            redirect-uri: http://52.78.56.248/oauth2/kakao
             authorization-grant-type: authorization_code
             scope:
               - profile_nickname
@@ -30,15 +30,15 @@ spring:
 
 cookie:
   expiration: 3600
-  domain: localhost
+  domain: 52.78.56.248
   max-age: 300
   access-name: ac_t
   refresh-name: rf_t
 
 frontend:
-  auth-redirect-url: http://localhost:3000/loading
-  base-url: http://localhost:3000
-  allowance-redirect-url: http://localhost:3000/login/term
+  auth-redirect-url: http://52.78.56.248/loading
+  base-url: http://52.78.56.248
+  allowance-redirect-url: http://52.78.56.248/login/term
 
 backend:
-  base-url: http://localhost:8080
+  base-url: http://api.52.78.56.248

@@ -28,3 +28,17 @@ spring:
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
+cookie:
+  expiration: 3600
+  domain: localhost
+  max-age: 300
+  access-name: ac_t
+  refresh-name: rf_t
+
+frontend:
+  auth-redirect-url: http://localhost:3000/loading
+  base-url: http://localhost:3000
+  allowance-redirect-url: http://localhost:3000/login/term
+
+backend:
+  base-url: http://localhost:8080
