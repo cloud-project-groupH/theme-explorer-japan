@@ -1,5 +1,6 @@
 package com.CPGroupH.config;
 
+import com.CPGroupH.domains.chat.security.JwtHandshakeInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
@@ -19,7 +20,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         // TODO: 실제 배포 시  특정 도메인만 가능하게 수정해야함
-        registry.addEndpoint("/ws").setAllowedOrigins("*");
+        registry.addEndpoint("/ws").setAllowedOrigins("*").addInterceptors(new JwtHandshakeInterceptor());
         // .withSockJS();
     }
 }

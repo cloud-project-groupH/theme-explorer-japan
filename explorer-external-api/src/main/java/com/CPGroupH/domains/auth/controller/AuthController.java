@@ -3,7 +3,6 @@ package com.CPGroupH.domains.auth.controller;
 import com.CPGroupH.domains.auth.dto.request.AllowanceRequest;
 import com.CPGroupH.domains.auth.dto.response.AllowanceResponse;
 import com.CPGroupH.domains.auth.dto.response.RefreshResponse;
-import com.CPGroupH.domains.auth.security.oauth2.entity.CustomOAuth2User;
 import com.CPGroupH.domains.auth.security.service.AuthService;
 import com.CPGroupH.domains.auth.security.service.CookieService;
 import com.CPGroupH.domains.auth.security.service.JwtService;
@@ -14,15 +13,15 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.io.IOException;
 
 @Slf4j
 @RestController

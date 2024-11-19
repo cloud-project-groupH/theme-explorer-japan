@@ -6,25 +6,21 @@ import com.CPGroupH.domains.member.repository.MemberRepository;
 import com.CPGroupH.error.code.AuthErrorCode;
 import com.CPGroupH.error.code.CommonErrorCode;
 import com.CPGroupH.error.exception.CustomException;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.Jwts.SIG;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.security.SignatureException;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
-import java.util.Date;
-import javax.crypto.SecretKey;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import javax.crypto.SecretKey;
+import java.util.Date;
 
 @Slf4j
 @Service
@@ -66,7 +62,7 @@ public class JwtService {
 
     public String resolveAccessToken(HttpServletRequest request) {
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(BEARER_PREFIX.length());
         }
         throw new CustomException(AuthErrorCode.ACCESS_TOKEN_NOT_FOUND);
@@ -100,7 +96,7 @@ public class JwtService {
 
     public Member getMemberFromAccessToken(String accessToken) {
         Long memberId = getMemberIdFromAccessToken(accessToken);
-       return memberRepository.findById(memberId).orElseThrow(() -> {
+        return memberRepository.findById(memberId).orElseThrow(() -> {
             return new CustomException(AuthErrorCode.USER_NOT_EXIST);
         });
     }
@@ -144,7 +140,7 @@ public class JwtService {
         return Jwts.builder()
                 .claim("memberId", memberId)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis()+ expiresIn*1000 ))
+                .expiration(new Date(System.currentTimeMillis() + expiresIn * 1000))
                 .signWith(secretKey, SIG.HS256)
                 .compact();
     }
@@ -154,26 +150,23 @@ public class JwtService {
     }
 
     private boolean isTokenExpired(String token, SecretKey secretKey, AuthToken authToken) {
-        try{
+        try {
             return getClaimsFromToken(token, secretKey).getExpiration().before(new Date());
-        }catch (JwtException e) {
-            if(e instanceof ExpiredJwtException) {
-                switch (authToken){
+        } catch (JwtException e) {
+            if (e instanceof ExpiredJwtException) {
+                switch (authToken) {
                     case ACCESS_TOKEN -> throw new CustomException(AuthErrorCode.ACCESS_TOKEN_EXPIRED);
                     case REFRESH_TOKEN -> throw new CustomException(AuthErrorCode.REFRESH_TOKEN_EXPIRED);
                     case TERMS -> throw new CustomException(AuthErrorCode.TERMS_TOKEN_EXPIRED);
                 }
             }
-            if(e instanceof MalformedJwtException) {
+            if (e instanceof MalformedJwtException) {
                 throw new CustomException(AuthErrorCode.INVALID_TOKEN_FORMAT);
-            }
-            else if(e instanceof SignatureException) {
+            } else if (e instanceof SignatureException) {
                 throw new CustomException(AuthErrorCode.INVALID_TOKEN_SIGNATURE);
-            }
-            else if(e instanceof UnsupportedJwtException){
+            } else if (e instanceof UnsupportedJwtException) {
                 throw new CustomException(AuthErrorCode.UNSUPPORTED_TOKEN);
-            }
-            else{//토큰 검사 중 알 수 없는 오류 발생시
+            } else {//토큰 검사 중 알 수 없는 오류 발생시
                 throw new CustomException(CommonErrorCode.INTERNAL_SERVER_ERROR);
             }
         }

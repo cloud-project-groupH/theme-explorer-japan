@@ -1,10 +1,11 @@
 package com.CPGroupH.domains.auth.security.oauth2.entity;
 
 import com.CPGroupH.domains.auth.security.oauth2.enums.SocialType;
-import java.util.Map;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
+
+import java.util.Map;
 
 @Getter
 public class OAuth2Attributes {
