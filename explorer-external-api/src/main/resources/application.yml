@@ -4,5 +4,6 @@ spring:
       local:
         - domain-local
         - common
-    active:
-      local
+      dev:
+        - domain-dev
+        - common
