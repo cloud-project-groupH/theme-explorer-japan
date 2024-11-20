@@ -57,7 +57,7 @@ jobs:
           key: ${{ secrets.EC2_PEMKEY }}
           port: 22
           script: |
-            cd ~/isshonigo/api
+            cd ~/isshonigo/api/theme-explorer-japan-be/infra/app
             docker login -u ${{ secrets.DOCKER_HUB_USERNAME }} -p ${{ secrets.DOCKER_HUB_PASSWORD }}
             docker-compose -f docker-compose.yml down
             docker-compose -f docker-compose.yml pull
