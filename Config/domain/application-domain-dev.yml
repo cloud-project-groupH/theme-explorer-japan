@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://52.78.56.248:3306/grouph
+    url: jdbc:mysql://isshoniGo-mysql:3306/grouph
     username: root
     password: cloudproject11
     driver-class-name: com.mysql.cj.jdbc.Driver
