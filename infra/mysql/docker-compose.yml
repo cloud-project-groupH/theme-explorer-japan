@@ -6,7 +6,7 @@ services:
       MYSQL_DATABASE: ${DB_NAME}
       MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./data:/var/lib/mysql
+      - ./isshonigo-data:/var/lib/mysql
     ports:
       - "3306:3306"
 
