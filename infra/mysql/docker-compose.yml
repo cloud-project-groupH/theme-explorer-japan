@@ -3,8 +3,8 @@ services:
     image: mysql:8.0.34
     container_name: isshoniGo-mysql
     environment:
-      MYSQL_DATABASE: grouph
-      MYSQL_ROOT_PASSWORD: cloudproject11
+      MYSQL_DATABASE: ${DB_NAME}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./data:/var/lib/mysql
     ports:
