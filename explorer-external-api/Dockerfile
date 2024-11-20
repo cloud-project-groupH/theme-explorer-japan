@@ -2,7 +2,7 @@ FROM openjdk:17
 
 WORKDIR /app
 
-ARG JAR_FILE=build/libs/explorer-external-api.jar
+ARG JAR_FILE=explorer-external-api/build/libs/explorer-external-api.jar
 
 COPY ${JAR_FILE} isshonigo-server.jar
 
