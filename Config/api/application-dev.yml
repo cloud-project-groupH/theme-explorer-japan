@@ -14,7 +14,7 @@ spring:
             client-name: kakao
             client-id: 3f60f411225724220d965e0349fa56db
             client-secret: rKPWKpG7EhTCInvm1VIetR94o7fiwIKp
-            redirect-uri: http://52.78.56.248/oauth2/kakao
+            redirect-uri: http://43.200.175.236/oauth2/kakao
             authorization-grant-type: authorization_code
             scope:
               - profile_nickname
@@ -36,9 +36,9 @@ cookie:
   refresh-name: rf_t
 
 frontend:
-  auth-redirect-url: http://52.78.56.248/loading
-  base-url: http://52.78.56.248
-  allowance-redirect-url: http://52.78.56.248/login/term
+  auth-redirect-url: http://43.200.175.236/loading
+  base-url: http://43.200.175.236/
+  allowance-redirect-url: http://43.200.175.236/login/term
 
 backend:
-  base-url: http://api.52.78.56.248
+  base-url: http://43.200.175.236/
