@@ -10,7 +10,7 @@ spring:
     active:
       local
 
-#logging:
+# logging:
 #  level:
 #    org:
 #      springframework:
