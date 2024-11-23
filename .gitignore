@@ -44,3 +44,7 @@ out/
 /infra/mysql/isshonigo-data
 /infra/redis/data
 /infra/redis/isshonigo-data
+
+### local setting
+/Config/api/application-local.yml
+/Config/domain/application-domain-local.yml

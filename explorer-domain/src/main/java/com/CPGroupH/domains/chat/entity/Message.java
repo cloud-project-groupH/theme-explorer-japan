@@ -28,15 +28,11 @@ public class Message extends BaseEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
-    @Column(nullable = false)
-    private Long createdAt;
-
     @Builder
-    public Message(ChatRoom chatRoom, Member sender, String content, Long createdAt) {
+    public Message(ChatRoom chatRoom, Member sender, String content) {
         this.chatRoom = chatRoom;
         this.sender = sender;
         this.content = content;
-        this.createdAt = createdAt;
     }
 
 }

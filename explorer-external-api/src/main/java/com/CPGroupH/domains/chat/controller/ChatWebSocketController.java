@@ -1,7 +1,7 @@
 package com.CPGroupH.domains.chat.controller;
 
 import com.CPGroupH.domains.chat.dto.request.MessageReqDTO;
-import com.CPGroupH.domains.chat.service.ChatService;
+import com.CPGroupH.domains.chat.service.ChatWebSocketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Controller;
 
 @Controller
 @RequiredArgsConstructor
-public class ChatController {
+public class ChatWebSocketController {
 
-    private final ChatService chatService;
+    private final ChatWebSocketService chatWebSocketService;
 
     @MessageMapping("/chat.sendMessage/{chatRoomId}")
     public void sendMessageToRoom(@DestinationVariable String chatRoomId, @Payload MessageReqDTO chatMessage) {
-        chatService.sendMessageToRoom(chatRoomId, chatMessage);
+        chatWebSocketService.sendMessageToRoom(chatRoomId, chatMessage);
     }
 }
