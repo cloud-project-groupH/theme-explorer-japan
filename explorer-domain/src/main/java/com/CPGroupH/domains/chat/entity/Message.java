@@ -2,14 +2,7 @@ package com.CPGroupH.domains.chat.entity;
 
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import com.CPGroupH.domains.member.entity.Member;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -35,11 +28,15 @@ public class Message extends BaseEntity {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String content;
 
+    @Column(nullable = false)
+    private Long createdAt;
+
     @Builder
-    public Message(ChatRoom chatRoom, Member sender, String content) {
+    public Message(ChatRoom chatRoom, Member sender, String content, Long createdAt) {
         this.chatRoom = chatRoom;
         this.sender = sender;
         this.content = content;
+        this.createdAt = createdAt;
     }
 
 }

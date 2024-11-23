@@ -77,6 +77,7 @@ public class ChatControllerTest {
         ObjectNode jsonObject = objectMapper.createObjectNode();
         jsonObject.put("sender", "TestUser");
         jsonObject.put("content", "Hello!");
+        jsonObject.put("createdAt", "1");
 
         // 메시지 전송
         session.send("/app/chat.sendMessage/123", jsonObject);
