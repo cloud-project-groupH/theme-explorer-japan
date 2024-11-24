@@ -2,12 +2,11 @@ package com.CPGroupH.domains.auth.security.oauth2.service;
 
 import com.CPGroupH.common.enums.MemberRole;
 import com.CPGroupH.domains.auth.security.oauth2.entity.CustomOAuth2User;
-import com.CPGroupH.domains.auth.security.oauth2.enums.SocialType;
 import com.CPGroupH.domains.auth.security.oauth2.entity.OAuth2Attributes;
 import com.CPGroupH.domains.auth.security.oauth2.entity.dto.OAuth2UserDTO;
+import com.CPGroupH.domains.auth.security.oauth2.enums.SocialType;
 import com.CPGroupH.domains.member.entity.Member;
 import com.CPGroupH.domains.member.repository.MemberRepository;
-import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
@@ -15,6 +14,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Slf4j
 @Service
