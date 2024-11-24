@@ -15,7 +15,7 @@ spring:
             client-id: 3f60f411225724220d965e0349fa56db
             client-secret: rKPWKpG7EhTCInvm1VIetR94o7fiwIKp
             client-authentication-method: client_secret_post
-            redirect-uri: http://43.200.175.236/login/oauth2/code/kakao
+            redirect-uri: http://43.200.175.236:8080/login/oauth2/code/kakao
             authorization-grant-type: authorization_code
             scope:
               - profile_nickname
@@ -37,9 +37,9 @@ cookie:
   refresh-name: rf_t
 
 frontend:
-  auth-redirect-url: http://43.200.175.236/loading
-  base-url: http://43.200.175.236/
-  allowance-redirect-url: http://43.200.175.236/login/term
+  auth-redirect-url: http://43.200.175.236:3000/loading
+  base-url: http://43.200.175.236:3000/
+  allowance-redirect-url: http://43.200.175.236:3000/login/term
 
 backend:
-  base-url: http://43.200.175.236/
+  base-url: http://43.200.175.236:8080/
