@@ -17,6 +17,7 @@ import io.swagger.v3.oas.models.servers.Server;
 import io.swagger.v3.oas.models.tags.Tag;
 import java.util.List;
 import java.util.Map;
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +39,8 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public OpenAPI openAPI(){
-        String jwtScheme = "jwtAuth";
+    public OpenAPI openAPI(OpenApiCustomizer openApiCustomizer){
+        String jwtScheme = "Bearer token";
         Server server = new Server();
         server.setUrl(backendBaseURL);
         server.setDescription("IsshoniGo API");
@@ -51,13 +52,17 @@ public class SwaggerConfig {
                         .scheme("Bearer")
                         .bearerFormat("JWT"));
 
-        return new OpenAPI().info(info())
+        OpenAPI openAPI = new OpenAPI().info(info())
                 .components(components)
                 .servers(List.of(server))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer token"))
                 .tags(List.of(new Tag().name(SOCIAL_TAG)
                         .description("OAuth2 endpoint")))
                 .path("/oauth2/authorization/kakao", pathItem(SocialType.KAKAO));
+
+        openApiCustomizer.customise(openAPI);
+
+        return openAPI;
     }
 
     private PathItem pathItem(SocialType socialType){
@@ -76,7 +81,7 @@ public class SwaggerConfig {
                                                 .type("object")
                                                 .example(Map.of(
                                                         "Set-Cookie",
-                                                        "accessToken=eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c; Max-Age=3600; Path=/; Domain=yellobook.site; HttpOnly=false; Secure=false, refreshToken=dGhpcy1pcy1hLXRlc3QtcmVmcmVzaC10b2tlbg; Max-Age=3600; Path=/; Domain=yellobook.site; HttpOnly=false; Secure=false"
+                                                        "accessToken=eyJhiwibmFtZSI6I...; Max-Age=3600; Path=/; Domain=...; HttpOnly=false; Secure=false, refreshToken=dGhpcy1pcy1hLXRlc3QtcmVmcmVzaC10b2tlbg; Max-Age=3600; Path=/; Domain=...; HttpOnly=false; Secure=false"
                                                 ))))))));
     }
 }
