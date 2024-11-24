@@ -5,7 +5,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 
 @Getter
 public enum SocialType {
-    KAKAO("KAKAO", "카카오 로그인");
+    KAKAO("kakao", "카카오 로그인");
 
     private final String registrationId;
     private final String title;

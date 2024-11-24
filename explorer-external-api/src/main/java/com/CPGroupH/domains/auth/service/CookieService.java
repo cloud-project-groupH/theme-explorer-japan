@@ -1,4 +1,4 @@
-package com.CPGroupH.domains.auth.security.service;
+package com.CPGroupH.domains.auth.service;
 
 import com.CPGroupH.error.code.AuthErrorCode;
 import com.CPGroupH.error.exception.CustomException;

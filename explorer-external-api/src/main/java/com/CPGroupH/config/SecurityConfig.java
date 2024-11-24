@@ -5,8 +5,8 @@ import com.CPGroupH.domains.auth.security.handler.CustomAccessDeniedHandler;
 import com.CPGroupH.domains.auth.security.handler.CustomAuthenticationEntryPoint;
 import com.CPGroupH.domains.auth.security.oauth2.handler.CustomSuccessHandler;
 import com.CPGroupH.domains.auth.security.oauth2.service.CustomOAuth2UserService;
-import com.CPGroupH.domains.auth.security.service.JwtService;
-import com.CPGroupH.domains.auth.security.service.RedisAuthService;
+import com.CPGroupH.domains.auth.service.JwtService;
+import com.CPGroupH.domains.auth.service.RedisAuthService;
 import java.util.Arrays;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -64,6 +64,27 @@ public class SecurityConfig {
 
         return http.build();
     }
+    @Bean
+    public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatchers(auth -> auth
+                        .requestMatchers(
+                                "/oauth2/authorization/**",
+                                "/login/oauth2/code/**"
+                        )
+                )
+                .cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
+                .csrf(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .oauth2Login((oauth2) -> oauth2
+                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
+                                .userService(customOAuth2UserService))
+                        .successHandler(customSuccessHandler))
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        return http.build();
+    }
 
     //jwt 인증용 필터체인
     @Bean
@@ -85,6 +106,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth
                         // 헬스 체크 경로는 jwt 인증 비활성화
                         .requestMatchers("/api/v1/admin/**")
+                        .hasRole("ADMIN")
+                        .requestMatchers(
+                                "/api/v1",
+                                "/api/v1/auth/terms",
+                                "/api/v1/auth/token/reissue",
+                                "/api/v1/dev/**"
+                        )
                         .permitAll()
                         .anyRequest()
                         .authenticated())
@@ -106,7 +134,9 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(
                 Arrays.asList(
                     "http://localhost:8080",
-                    "http://localhost:3000"
+                    "http://localhost:3000",
+                    "https://43.200.175.236:8080",
+                    "https://43.200.175.236:3000"
         ));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.addAllowedHeader("*");

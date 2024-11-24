@@ -1,4 +1,4 @@
-package com.CPGroupH.domains.auth.security.service;
+package com.CPGroupH.domains.auth.service;
 
 import com.CPGroupH.domains.auth.dto.response.AllowanceResponse;
 import com.CPGroupH.domains.auth.dto.response.RefreshResponse;
