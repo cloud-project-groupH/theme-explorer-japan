@@ -1,4 +1,4 @@
-package com.CPGroupH.domains.auth.security.service;
+package com.CPGroupH.domains.auth.service;
 
 import com.CPGroupH.domains.auth.enums.AuthToken;
 import com.CPGroupH.domains.member.entity.Member;

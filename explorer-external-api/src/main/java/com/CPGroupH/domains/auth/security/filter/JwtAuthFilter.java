@@ -2,8 +2,8 @@ package com.CPGroupH.domains.auth.security.filter;
 
 import com.CPGroupH.domains.auth.security.oauth2.entity.CustomOAuth2User;
 import com.CPGroupH.domains.auth.security.oauth2.entity.dto.OAuth2UserDTO;
-import com.CPGroupH.domains.auth.security.service.JwtService;
-import com.CPGroupH.domains.auth.security.service.RedisAuthService;
+import com.CPGroupH.domains.auth.service.JwtService;
+import com.CPGroupH.domains.auth.service.RedisAuthService;
 import com.CPGroupH.domains.member.entity.Member;
 import com.CPGroupH.error.exception.CustomException;
 import jakarta.servlet.FilterChain;

@@ -1,4 +1,4 @@
-package com.CPGroupH.domains.auth.security.service;
+package com.CPGroupH.domains.auth.service;
 
 import java.time.Duration;
 import lombok.RequiredArgsConstructor;

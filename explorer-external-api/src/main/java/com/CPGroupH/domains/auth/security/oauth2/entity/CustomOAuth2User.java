@@ -1,5 +1,6 @@
 package com.CPGroupH.domains.auth.security.oauth2.entity;
 
+import com.CPGroupH.common.enums.MemberRole;
 import com.CPGroupH.domains.auth.security.oauth2.entity.dto.OAuth2UserDTO;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -38,5 +39,29 @@ public class CustomOAuth2User implements OAuth2User {
     @Override
     public String getName() {
         return oauth2UserDTO.email();
+    }
+
+    public Long getMemberId(){
+        return oauth2UserDTO.memberId();
+    }
+
+    public String getNickname(){
+        return oauth2UserDTO.nickname();
+    }
+
+    public String getEmail(){
+        return oauth2UserDTO.email();
+    }
+
+    public String getProfileImage(){
+        return oauth2UserDTO.profileImage();
+    }
+
+    public Boolean getAllowance(){
+        return oauth2UserDTO.allowance();
+    }
+
+    public MemberRole getRole(){
+        return oauth2UserDTO.role();
     }
 }
