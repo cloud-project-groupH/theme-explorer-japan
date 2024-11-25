@@ -1,6 +1,6 @@
 package com.CPGroupH.config;
 
-import com.CPGroupH.domains.auth.security.service.JwtService;
+import com.CPGroupH.domains.auth.service.JwtService;
 import com.CPGroupH.domains.chat.security.JwtHandshakeInterceptor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Configuration;

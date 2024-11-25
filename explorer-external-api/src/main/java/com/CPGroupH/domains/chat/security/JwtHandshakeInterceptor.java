@@ -1,6 +1,6 @@
 package com.CPGroupH.domains.chat.security;
 
-import com.CPGroupH.domains.auth.security.service.JwtService;
+import com.CPGroupH.domains.auth.service.JwtService;
 import com.CPGroupH.error.code.ErrorCode;
 import com.CPGroupH.error.exception.CustomException;
 import lombok.RequiredArgsConstructor;
