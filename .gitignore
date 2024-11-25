@@ -48,3 +48,6 @@ out/
 ### local setting
 /Config/api/application-local.yml
 /Config/domain/application-domain-local.yml
+
+### jenv
+/.java-version
