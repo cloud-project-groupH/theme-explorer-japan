@@ -13,6 +13,9 @@ public class WebConfig implements WebMvcConfigurer {
                 .exposedHeaders("Set-Cookie")
                 .allowedOrigins(
                         "http://localhost:8080",
-                        "http://localhost:3000");
+                        "http://localhost:3000",
+                        "http://43.200.175.236:8080",
+                        "http://43.200.175.236:3000"
+                );
     }
 }

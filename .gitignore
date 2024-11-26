@@ -51,3 +51,7 @@ out/
 
 ### jenv
 /.java-version
+
+### yml
+/Config/api/*.yml
+/Config/domain/*.yml
