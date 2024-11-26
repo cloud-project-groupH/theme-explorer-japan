@@ -1,12 +1,8 @@
 package com.CPGroupH.domains.place.entity;
 
-import com.CPGroupH.common.enums.PlaceStatus;
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import com.CPGroupH.domains.member.entity.Member;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,12 +19,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "togos",
+@Table(name = "likes",
     uniqueConstraints = {
-        @UniqueConstraint(name = "uc_togo",columnNames = {"member_id", "place_id"})
+        @UniqueConstraint(name = "uc_like",columnNames = {"member_id", "place_id"})
 }
 )
-public class Togo extends BaseEntity {
+public class Like extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,15 +38,10 @@ public class Togo extends BaseEntity {
     @JoinColumn(name = "place_id", nullable = false)
     private Place place;
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PlaceStatus status;
-
     @Builder
-    public Togo(Member member, Place place, PlaceStatus status) {
+    public Like(Member member, Place place) {
         this.member = member;
         this.place = place;
-        this.status = status;
     }
 
 
