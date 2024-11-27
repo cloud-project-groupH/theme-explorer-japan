@@ -7,7 +7,7 @@ spring:
 cloud:
   aws:
     s3:
-      bucket: isshoni-s3.bucket
+      bucketName: isshoni-s3
     region:
       static: ap-northeast-2
       auto: false
