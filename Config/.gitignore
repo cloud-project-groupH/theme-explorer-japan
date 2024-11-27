@@ -1,2 +1,6 @@
 *.xml
 *.iml
+
+/api/*.yml
+/domain/*.yml
+/infra/*.yml
