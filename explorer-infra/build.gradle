@@ -21,6 +21,11 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+tasks.register('copyConfig', Copy) {
+    from '../Config/infra/'
+    include "application*.yml"
+    into 'src/main/resources'
+}
 
 bootJar {
     enabled = false
