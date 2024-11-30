@@ -34,16 +34,38 @@ public class Place extends BaseEntity {
     private String title;
 
     @Column(nullable = false)
+    private Integer likes;
+
+    @Column(nullable = false)
+    private Integer visited;
+
+    @Column(nullable = false)
     private String latitude;
 
     @Column(nullable = false)
     private String longitude;
 
     @Builder
-    public Place(Address address, String title, String latitude, String longitude) {
+    public Place(Address address, String title, Integer likes, Integer visited, String latitude, String longitude) {
         this.address = address;
         this.title = title;
+        this.likes = likes;
+        this.visited = visited;
         this.latitude = latitude;
         this.longitude = longitude;
+    }
+
+    public void increaseLikes(Place place) {
+        place.likes++;
+    }
+    public void decreaseLikes(Place place) {
+        place.likes--;
+    }
+
+    public void increaseVisited(Place place) {
+        place.visited++;
+    }
+    public void decreaseVisited(Place place) {
+        place.visited--;
     }
 }

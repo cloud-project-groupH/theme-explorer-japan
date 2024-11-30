@@ -2,7 +2,11 @@ package com.CPGroupH.domains.member.entity;
 
 import com.CPGroupH.common.enums.MemberRole;
 import com.CPGroupH.domains.common.entity.BaseEntity;
+import com.CPGroupH.domains.place.entity.Like;
+import com.CPGroupH.domains.place.entity.Visited;
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -36,6 +40,12 @@ public class Member extends BaseEntity {
 
     @Column
     private LocalDateTime deletedAt;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Like> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Visited> visited = new ArrayList<>();
 
     @Builder
     public Member(String nickname, String email, String profileImage, Boolean allowance, MemberRole role) {
