@@ -55,17 +55,17 @@ public class Place extends BaseEntity {
         this.longitude = longitude;
     }
 
-    public void increaseLikes() {
-        this.likes++;
+    public void increaseLikes(Place place) {
+        place.likes++;
     }
-    public void decreaseLikes() {
-        this.likes--;
+    public void decreaseLikes(Place place) {
+        place.likes--;
     }
 
-    public void increaseVisited() {
-        this.visited++;
+    public void increaseVisited(Place place) {
+        place.visited++;
     }
-    public void decreaseVisited() {
-        this.visited--;
+    public void decreaseVisited(Place place) {
+        place.visited--;
     }
 }
