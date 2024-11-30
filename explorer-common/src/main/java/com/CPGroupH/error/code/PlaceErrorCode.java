@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 @Getter
 @AllArgsConstructor
-public enum PlaceErrorCode {
+public enum PlaceErrorCode implements ErrorCode {
 
     PLACE_NOT_FOUND(HttpStatus.NOT_FOUND, "PLACE-001", "장소가 존재하지 않습니다.");
 
