@@ -2,7 +2,6 @@ package com.CPGroupH.domains.category.entity;
 
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import com.CPGroupH.domains.member.entity.Member;
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "preferences",
         uniqueConstraints = {
-        @UniqueConstraint(name = "uc_preference", columnNames = {"member_id", "category_id"})
+        @UniqueConstraint(name = "uc_preference", columnNames = {"member_id", "subcategory_id"})
         })
 public class Preference extends BaseEntity {
     @Id
@@ -35,10 +34,10 @@ public class Preference extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subcategory_id", nullable = false)
-    private Category category;
+    private SubCategory category;
 
     @Builder
-    public Preference(Member member, Category category) {
+    public Preference(Member member, SubCategory category) {
         this.member = member;
         this.category = category;
     }
