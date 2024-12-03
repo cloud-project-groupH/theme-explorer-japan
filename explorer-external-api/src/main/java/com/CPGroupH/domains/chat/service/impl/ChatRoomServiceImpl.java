@@ -5,7 +5,6 @@ import com.CPGroupH.domains.chat.entity.repository.ChatRoomRepository;
 import com.CPGroupH.domains.chat.service.ChatRoomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +20,12 @@ public class ChatRoomServiceImpl implements ChatRoomService {
         return chatRoomRepository.findChatRoomById(Long.parseLong(id)).orElseThrow(() -> new NoSuchElementException("ChatRoom이 없습니다"));
     }
 
-    public Page<ChatRoom> getChatRoomsByParticipant(Long participantId, Integer limit) {
-        Pageable pageable = (limit != null && limit > 0)
-                ? PageRequest.of(0, limit)
-                : Pageable.unpaged();
+    public Page<ChatRoom> getChatRoomsByParticipant(Long participantId, Pageable pageable) {
 
         return chatRoomRepository.findByParticipantId(participantId, pageable);
     }
 
-    public Page<ChatRoom> getAllChatRooms(Integer limit) {
-        Pageable pageable = (limit != null && limit > 0)
-                ? PageRequest.of(0, limit)
-                : Pageable.unpaged();
+    public Page<ChatRoom> getAllChatRooms(Pageable pageable) {
 
         return chatRoomRepository.findAll(pageable);
     }
