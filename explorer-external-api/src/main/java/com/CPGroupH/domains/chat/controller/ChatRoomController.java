@@ -30,11 +30,12 @@ public class ChatRoomController {
     @Operation(summary = "채팅방 가져오기")
     @GetMapping("/")
     public ResponseEntity<SuccessResponse<Page<ChatRoom>>> getChatRooms(@RequestParam(value = "participantId", required = false) Long participantId,
+                                                                        @RequestParam(value = "page", defaultValue = "0", required = false) Integer page,
                                                                         @RequestParam(value = "limit", required = false) Integer limit,
                                                                         @RequestParam(value = "sort", defaultValue = "createdAt") String sort,
                                                                         @RequestParam(value = "order", defaultValue = "desc") String order) {
 
-        Pageable pageable = PageRequest.of(0, limit != null ? limit : 10,
+        Pageable pageable = PageRequest.of(page, limit != null ? limit : 10,
                 "desc".equalsIgnoreCase(order) ? Sort.by(sort).descending() : Sort.by(sort).ascending());
 
         Page<ChatRoom> chatRooms = participantId != null
