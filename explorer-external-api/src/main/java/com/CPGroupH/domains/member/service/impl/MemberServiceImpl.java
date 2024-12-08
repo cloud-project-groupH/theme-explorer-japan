@@ -15,6 +15,7 @@ import com.CPGroupH.domains.place.repository.VisitedRepository;
 import com.CPGroupH.error.code.MemberErrorCode;
 import com.CPGroupH.error.exception.CustomException;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +47,28 @@ public class MemberServiceImpl implements MemberService {
     public MemberMapResDTO findMapByMemberId(Long id){
         return null;
     }
+
+    public Boolean hasCompletedAllowance(String email){
+        Optional<Member> member = memberRepository.findByEmail(email);
+
+        if(member.isPresent()){
+            return member.get().getAllowance();
+        }
+        else{
+            throw new CustomException(MemberErrorCode.MEMBER_NOT_FOUND);
+        }
+    }
+
+    public void updateAllowance(String email){
+        Optional<Member> member = memberRepository.findByEmail(email);
+        if(member.isPresent()){
+            member.get().updateAllowance();
+            memberRepository.save(member.get());
+        }
+        else{
+            throw new CustomException(MemberErrorCode.MEMBER_NOT_FOUND);
+        }
+    }
+
 
 }

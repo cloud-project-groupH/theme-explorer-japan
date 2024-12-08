@@ -32,7 +32,8 @@ public class Member extends BaseEntity {
 
     private String profileImage;
 
-    private Boolean allowance;
+    @Column(nullable = false)
+    private Boolean allowance = false;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
