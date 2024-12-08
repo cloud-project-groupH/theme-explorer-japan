@@ -46,25 +46,6 @@ public class SecurityConfig {
 
     //OAuth 인증용 필터체인
     @Bean
-    public SecurityFilterChain oAuth2SecurityFilterChain(HttpSecurity http) throws Exception {
-        http.securityMatchers(auth -> auth
-                .requestMatchers(
-                        "/oauth2/authorization/**",
-                        "/login/oauth2/code/**")
-                ).cors(corsCustomizer -> corsCustomizer.configurationSource(corsConfigurationSource()))
-                .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(AbstractHttpConfigurer::disable)
-                .httpBasic(AbstractHttpConfigurer::disable)
-                .oauth2Login((oauth2) -> oauth2
-                        .userInfoEndpoint((userInfoEndpointConfig) -> userInfoEndpointConfig
-                                .userService(customOAuth2UserService))
-                        .successHandler(customSuccessHandler))
-                .sessionManagement(session -> session
-                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-
-        return http.build();
-    }
-    @Bean
     public SecurityFilterChain oauth2SecurityFilterChain(HttpSecurity http) throws Exception {
         http
                 .securityMatchers(auth -> auth
@@ -109,6 +90,7 @@ public class SecurityConfig {
                         .hasRole("ADMIN")
                         .requestMatchers(
                                 "/api/v1",
+                                "/api/v1/auth/kakao",
                                 "/api/v1/auth/terms",
                                 "/api/v1/auth/token/reissue",
                                 "/api/v1/dev/**"
@@ -131,13 +113,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.setAllowedOrigins(
-                Arrays.asList(
-                    "http://localhost:8080",
-                    "http://localhost:3000",
-                    "https://43.200.175.236:8080",
-                    "https://43.200.175.236:3000"
-        ));
+        configuration.addAllowedOriginPattern("*");
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         configuration.addAllowedHeader("*");
         configuration.setExposedHeaders(Arrays.asList("Set-Cookie", "Authorization"));
@@ -145,6 +121,5 @@ public class SecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-
     }
 }
