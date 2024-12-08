@@ -10,4 +10,6 @@ public interface MemberService {
     MemberLikeResDTO findLikeByMemberId(Long id);
     MemberVisitedResDTO findVisitedByMemberId(Long id);
     MemberMapResDTO findMapByMemberId(Long id);
+    Boolean hasCompletedAllowance(String email);
+    void updateAllowance(String email);
 }

@@ -38,8 +38,8 @@ cookie:
 
 frontend:
   auth-redirect-url: http://43.200.175.236:3000/loading
-  base-url: http://43.200.175.236:3000/
+  base-url: http://43.200.175.236:3000
   allowance-redirect-url: http://43.200.175.236:3000/login/term
 
 backend:
-  base-url: http://43.200.175.236:8080/
+  base-url: http://43.200.175.236:8080
