@@ -1,5 +1,6 @@
 package com.CPGroupH.domains.member.service.impl;
 
+import com.CPGroupH.domains.member.dto.request.CategoryReqDTO;
 import com.CPGroupH.domains.member.dto.response.MemberLikeResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberMapResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberVisitedResDTO;
@@ -70,5 +71,12 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
+    public void addMemberCategory(CategoryReqDTO categoryReqDTO, Long id){
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
+
+        member.updateCategoies(categoryReqDTO.categoryIds());
+        member.updateAllowance();
+    }
 
 }
