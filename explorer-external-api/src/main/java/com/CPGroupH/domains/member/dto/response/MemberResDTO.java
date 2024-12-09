@@ -5,14 +5,16 @@ import com.CPGroupH.domains.member.entity.Member;
 
 import java.time.LocalDateTime;
 
-public record MemberResDTO(Long id, String email, String profileUrl, MemberRole role, LocalDateTime deleteAt) {
+public record MemberResDTO(
+        Long id,
+        String email,
+        String profileUrl
+) {
     public static MemberResDTO fromEntity(Member member) {
         return new MemberResDTO(
                 member.getId(),
                 member.getEmail(),
-                member.getProfileImage(),
-                member.getRole(),
-                member.getDeletedAt()
+                member.getProfileImage()
         );
     }
 
@@ -20,7 +22,6 @@ public record MemberResDTO(Long id, String email, String profileUrl, MemberRole 
         return Member.builder()
                 .email(this.email)
                 .profileImage(this.profileUrl)
-                .role(this.role)
                 .build();
     }
 }
