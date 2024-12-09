@@ -2,7 +2,7 @@
 
 클라우드 프로젝트 H조 Backend Repository입니다.
 
-기술 스택: Spring, docker, ec2
+기술 스택: Spring, docker, AWS
 
 ---
 
@@ -26,3 +26,5 @@
 - chore: 빌드 업무 수정 및 그 외
 
 ---
+
+저희 서비스는 일본 도쿄 여행을 중심으로 다양한 사람과 같은 장소를 여행할 수 있도록 구성해보았습니다.
