@@ -2,6 +2,7 @@ package com.CPGroupH.domains.member.controller;
 
 import com.CPGroupH.domains.auth.security.oauth2.entity.CustomOAuth2User;
 import com.CPGroupH.domains.auth.service.JwtService;
+import com.CPGroupH.domains.member.dto.request.CategoryReqDTO;
 import com.CPGroupH.domains.member.dto.response.MemberLikeResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberMapResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberVisitedResDTO;
@@ -16,7 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -66,5 +68,13 @@ public class MemberController {
 
         return ResponseFactory.success(member.getAllowance());
     }
-
+    @PostMapping("/categories")
+    @Operation(summary = "좋아하는 카테고리 추가")
+    public ResponseEntity<SuccessResponse<Void>> addCategory(
+            @RequestBody CategoryReqDTO request,
+            @AuthenticationPrincipal CustomOAuth2User user
+    ){
+        memberService.addMemberCategory(request, user.getMemberId());
+        return ResponseEntity.noContent().build();
+    }
 }
