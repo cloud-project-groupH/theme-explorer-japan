@@ -5,6 +5,7 @@ import com.CPGroupH.domains.auth.service.JwtService;
 import com.CPGroupH.domains.member.dto.request.CategoryReqDTO;
 import com.CPGroupH.domains.member.dto.response.MemberLikeResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberMapResDTO;
+import com.CPGroupH.domains.member.dto.response.MemberResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberVisitedResDTO;
 import com.CPGroupH.domains.member.entity.Member;
 import com.CPGroupH.domains.member.service.MemberService;
@@ -76,5 +77,13 @@ public class MemberController {
     ){
         memberService.addMemberCategory(request, user.getMemberId());
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/profile")
+    @Operation(summary = "내 정보")
+    public ResponseEntity<SuccessResponse<MemberResDTO>> getProfile(
+            @AuthenticationPrincipal CustomOAuth2User user
+    ){
+        return null;
     }
 }
