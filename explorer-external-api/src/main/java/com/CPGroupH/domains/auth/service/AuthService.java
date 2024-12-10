@@ -31,7 +31,7 @@ public class AuthService {
     private final JwtService jwtService;
     private final MemberRepository memberRepository;
     private final AuthMapper authMapper;
-    RestTemplate restTemplate;
+    RestTemplate restTemplate = new RestTemplate();
 
     public RefreshResponse reissueToken(String refreshToken) {
         log.info("[AUTH_INFO]refreshToken 을 이용해 accessToken 재발급: {}", refreshToken);
