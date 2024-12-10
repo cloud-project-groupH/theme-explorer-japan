@@ -13,5 +13,13 @@ public interface PlaceRepository extends JpaRepository<Place, Long> {
             "JOIN Recommendation r ON r.place = p " +
             "WHERE r.subCategory.id IN :subcategories")
     List<Place> findPlacesBySubcategories(@Param("subcategories") List<Long> subcategories);
+
+    @Query("SELECT p FROM Place p " +
+            "JOIN Recommendation r ON r.place = p " +
+            "JOIN SubCategory sc ON r.subCategory = sc " +
+            "WHERE p.title LIKE %:keyword% " +
+            "   OR p.description LIKE %:keyword% " +
+            "   OR sc.description LIKE %:keyword%")
+    List<Place> searchPlacesByKeyword(@Param("keyword") String keyword);
     List<Place> findTop5ByOrderByLikesDesc();
 }

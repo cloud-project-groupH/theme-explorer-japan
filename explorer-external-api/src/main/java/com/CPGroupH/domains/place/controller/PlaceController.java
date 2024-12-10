@@ -44,11 +44,13 @@ public class PlaceController {
 
     @GetMapping("/personal")
     public ResponseEntity<List<PersonalPlaceResDTO>> getPersonalPlaces(@AuthenticationPrincipal CustomOAuth2User user) {
-        return null;
+        List<PersonalPlaceResDTO> response = placeService.personalPlace(user.getMemberId());
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping("/search")
     public ResponseEntity<List<SearchPlaceResDTO>> getSearchPlaces(@RequestParam String keyword) {
-        return null;
+        List<SearchPlaceResDTO> response = placeService.searchPlace(keyword);
+        return ResponseEntity.ok(response);
     }
 }

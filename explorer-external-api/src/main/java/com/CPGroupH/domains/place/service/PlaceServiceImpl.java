@@ -60,11 +60,17 @@ public class PlaceServiceImpl implements PlaceService {
         place.increaseVisited(place);
     }
 
+    /*
+    global 추천
+     */
     public List<PopularPlaceResDTO> popularPlace(){
         List<Place> popularList = placeRepository.findTop5ByOrderByLikesDesc();
         return placeMapper.toPopularPlaceResDTO(popularList);
     }
 
+    /*
+    개인 추천
+     */
     public List<PersonalPlaceResDTO> personalPlace(Long memberId){
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
@@ -73,7 +79,11 @@ public class PlaceServiceImpl implements PlaceService {
         return placeMapper.toPersonalPlaceResDTO(places);
     }
 
-    public List<SearchPlaceResDTO> searchPlace(String key){
-        return null;
+    /*
+    검색 기능
+     */
+    public List<SearchPlaceResDTO> searchPlace(String keyword){
+        List<Place> places = placeRepository.searchPlacesByKeyword(keyword);
+        return placeMapper.toSearchPlaceResDTO(places);
     }
 }
