@@ -3,11 +3,13 @@ package aws.s3.service;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import lombok.RequiredArgsConstructor;
+import org.apache.http.HttpHeaders;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -43,6 +45,18 @@ public class S3Service {
             s3Client.putObject(request);
         }catch (JsonProcessingException e){
             throw new RuntimeException(e);
+        }
+    }
+
+    public byte[] getImage(String key){
+        try{
+            S3Object s3Object = s3Client.getObject(bucketName, key);
+            InputStream inputStream = s3Object.getObjectContent();
+
+            return inputStream.readAllBytes();
+
+        } catch (IOException e) {
+            throw new RuntimeException("S3 이미지 가져오기 실패", e);
         }
     }
 
