@@ -45,14 +45,19 @@ public class Place extends BaseEntity {
     @Column(nullable = false)
     private String longitude;
 
+    //S3
+    @Column
+    private String imageKey;
+
     @Builder
-    public Place(Address address, String title, Integer likes, Integer visited, String latitude, String longitude) {
+    public Place(Address address, String title, Integer likes, Integer visited, String latitude, String longitude, String imageKey) {
         this.address = address;
         this.title = title;
         this.likes = likes;
         this.visited = visited;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.imageKey = imageKey;
     }
 
     public void increaseLikes(Place place) {
