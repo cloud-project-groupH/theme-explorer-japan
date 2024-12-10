@@ -65,11 +65,15 @@ public class PlaceServiceImpl implements PlaceService {
         return placeMapper.toPopularPlaceResDTO(popularList);
     }
 
-    public List<PersonalPlaceResDTO> personalPlace(){
-        return null;
+    public List<PersonalPlaceResDTO> personalPlace(Long memberId){
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
+
+        List<Place> places = placeRepository.findPlacesBySubcategories(member.getSubcategories());
+        return placeMapper.toPersonalPlaceResDTO(places);
     }
 
-    public List<SearchPlaceResDTO> searchPlace(){
+    public List<SearchPlaceResDTO> searchPlace(String key){
         return null;
     }
 }

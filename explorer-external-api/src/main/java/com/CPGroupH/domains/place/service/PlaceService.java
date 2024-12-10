@@ -10,6 +10,6 @@ public interface PlaceService {
     void like(Long memberId, Long placeId);
     void visited(Long memberId, Long placeId);
     List<PopularPlaceResDTO> popularPlace();
-    List<PersonalPlaceResDTO> personalPlace();
-    List<SearchPlaceResDTO> searchPlace();
+    List<PersonalPlaceResDTO> personalPlace(Long memberId);
+    List<SearchPlaceResDTO> searchPlace(String key);
 }
