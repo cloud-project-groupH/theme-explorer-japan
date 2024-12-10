@@ -1,6 +1,8 @@
 package com.CPGroupH.domains.category.entity;
 
 import com.CPGroupH.domains.common.entity.BaseEntity;
+import com.CPGroupH.domains.place.entity.Recommendation;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,7 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +38,9 @@ public class SubCategory extends BaseEntity {
     //세부 카테고리
     @Column(nullable = false)
     private String description;
+
+    @OneToMany(mappedBy = "subCategory", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Recommendation> recommendations = new ArrayList<>();
 
     @Builder
     public SubCategory(Category category, String description) {
