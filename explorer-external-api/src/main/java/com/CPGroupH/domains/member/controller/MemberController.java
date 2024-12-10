@@ -84,6 +84,7 @@ public class MemberController {
     public ResponseEntity<SuccessResponse<MemberResDTO>> getProfile(
             @AuthenticationPrincipal CustomOAuth2User user
     ){
-        return null;
+        MemberResDTO response = memberService.findMemberById(user.getMemberId());
+        return ResponseFactory.success(response);
     }
 }
