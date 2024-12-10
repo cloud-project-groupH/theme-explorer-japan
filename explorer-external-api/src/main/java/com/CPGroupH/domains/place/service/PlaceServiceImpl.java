@@ -2,15 +2,20 @@ package com.CPGroupH.domains.place.service;
 
 import com.CPGroupH.domains.member.entity.Member;
 import com.CPGroupH.domains.member.repository.MemberRepository;
+import com.CPGroupH.domains.place.dto.response.PersonalPlaceResDTO;
+import com.CPGroupH.domains.place.dto.response.PopularPlaceResDTO;
+import com.CPGroupH.domains.place.dto.response.SearchPlaceResDTO;
 import com.CPGroupH.domains.place.entity.Like;
 import com.CPGroupH.domains.place.entity.Place;
 import com.CPGroupH.domains.place.entity.Visited;
+import com.CPGroupH.domains.place.mapper.PlaceMapper;
 import com.CPGroupH.domains.place.repository.LikeRepository;
 import com.CPGroupH.domains.place.repository.PlaceRepository;
 import com.CPGroupH.domains.place.repository.VisitedRepository;
 import com.CPGroupH.error.code.MemberErrorCode;
 import com.CPGroupH.error.code.PlaceErrorCode;
 import com.CPGroupH.error.exception.CustomException;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,6 +28,8 @@ public class PlaceServiceImpl implements PlaceService {
     private final MemberRepository memberRepository;
     private final LikeRepository likeRepository;
     private final VisitedRepository visitedRepository;
+    private final PlaceMapper placeMapper;
+
     /*
     좋아요 기능
      */
@@ -51,5 +58,18 @@ public class PlaceServiceImpl implements PlaceService {
 
         visitedRepository.save(new Visited(member, place));
         place.increaseVisited(place);
+    }
+
+    public List<PopularPlaceResDTO> popularPlace(){
+        List<Place> popularList = placeRepository.findTop5ByOrderByLikesDesc();
+        return placeMapper.toPopularPlaceResDTO(popularList);
+    }
+
+    public List<PersonalPlaceResDTO> personalPlace(){
+        return null;
+    }
+
+    public List<SearchPlaceResDTO> searchPlace(){
+        return null;
     }
 }
