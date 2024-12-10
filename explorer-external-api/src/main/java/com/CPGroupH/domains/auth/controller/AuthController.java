@@ -1,11 +1,14 @@
 package com.CPGroupH.domains.auth.controller;
 
+import com.CPGroupH.common.enums.MemberRole;
 import com.CPGroupH.domains.auth.dto.request.AllowanceRequest;
 import com.CPGroupH.domains.auth.dto.response.AllowanceResponse;
 import com.CPGroupH.domains.auth.dto.response.RefreshResponse;
 import com.CPGroupH.domains.auth.service.AuthService;
 import com.CPGroupH.domains.auth.service.CookieService;
 import com.CPGroupH.domains.auth.service.JwtService;
+import com.CPGroupH.domains.member.entity.Member;
+import com.CPGroupH.domains.member.repository.MemberRepository;
 import com.CPGroupH.response.ResponseFactory;
 import com.CPGroupH.response.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -32,6 +35,8 @@ public class AuthController {
     private final AuthService authService;
     private final CookieService cookieService;
     private final JwtService jwtService;
+    private final MemberRepository memberRepository;
+
     RestTemplate restTemplate = new RestTemplate(); // Kakao API 호출용
 
     @Operation(summary = "accessToken 재발급")
@@ -55,45 +60,12 @@ public class AuthController {
     @Operation(summary = "카카오 로그인 처리 (Flutter SDK에서 받은 토큰 처리)")
     @PostMapping("/kakao")
     public ResponseEntity<?> kakaoLogin(HttpServletRequest request) {
-        String authorizationHeader = request.getHeader("Authorization");
-        System.out.println("Authorization: " + request.getHeader("Authorization"));
-        if (authorizationHeader == null || !authorizationHeader.startsWith("Bearer ")) {
-            return ResponseEntity.badRequest().body("No Bearer token provided");
-        }
-
-        String kakaoAccessToken = authorizationHeader.substring(7); // 'Bearer ' 제거
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setBearerAuth(kakaoAccessToken);
-        HttpEntity<Void> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<Map> kakaoResponse = restTemplate.exchange(
-                "https://kapi.kakao.com/v2/user/me",
-                HttpMethod.GET,
-                entity,
-                Map.class
-        );
-
-        if (kakaoResponse.getStatusCode() == HttpStatus.OK) {
-            Map<String,Object> kakaoUserInfo = kakaoResponse.getBody();
-            Long kakaoId = ((Number) kakaoUserInfo.get("id")).longValue();
-
-            // 사용자 식별 로직 (DB 조회/생성)
-            // User user = userService.findOrCreateUserByKakaoId(kakaoId);
-            // long userId = user.getId();
-
-            // 예시로 kakaoId 자체를 userId로 사용
-            long userId = kakaoId;
-
-            String accessToken = jwtService.createAccessToken(userId);
-            String refreshToken = jwtService.createRefreshToken(userId);
-
-            Map<String,String> response = new HashMap<>();
-            response.put("accessToken", accessToken);
-            response.put("refreshToken", refreshToken);
-
-            return ResponseEntity.ok(response);
-        } else {
+        try {
+            var tokens = authService.handleKakaoLogin(request);
+            return ResponseEntity.ok(tokens);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("카카오 사용자 정보 조회 실패");
         }
     }

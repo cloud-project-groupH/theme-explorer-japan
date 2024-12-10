@@ -3,6 +3,7 @@ package com.CPGroupH.domains.member.service.impl;
 import com.CPGroupH.domains.member.dto.request.CategoryReqDTO;
 import com.CPGroupH.domains.member.dto.response.MemberLikeResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberMapResDTO;
+import com.CPGroupH.domains.member.dto.response.MemberResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberVisitedResDTO;
 import com.CPGroupH.domains.member.entity.Member;
 import com.CPGroupH.domains.member.repository.MemberRepository;
@@ -79,4 +80,10 @@ public class MemberServiceImpl implements MemberService {
         member.updateAllowance();
     }
 
+    public MemberResDTO findMemberById(Long id){
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
+
+        return MemberResDTO.fromEntity(member);
+    }
 }
