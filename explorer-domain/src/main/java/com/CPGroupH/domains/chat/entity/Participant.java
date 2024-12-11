@@ -19,9 +19,16 @@ public class Participant extends BaseEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "chatroom_id", nullable = false)
-    private ChatRoom chatRoom;
+    public ChatRoom chatRoom;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+    public Member member;
+    
+    public static Participant of(ChatRoom chatRoom, Member member) {
+        Participant participant = new Participant();
+        participant.chatRoom = chatRoom;
+        participant.member = member;
+        return participant;
+    }
 }
