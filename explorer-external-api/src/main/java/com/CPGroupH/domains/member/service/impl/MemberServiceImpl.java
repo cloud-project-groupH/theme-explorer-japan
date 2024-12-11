@@ -1,5 +1,7 @@
 package com.CPGroupH.domains.member.service.impl;
 
+import com.CPGroupH.domains.category.entity.SubCategory;
+import com.CPGroupH.domains.category.repository.SubCategoryRepository;
 import com.CPGroupH.domains.member.dto.request.CategoryReqDTO;
 import com.CPGroupH.domains.member.dto.response.MemberLikeResDTO;
 import com.CPGroupH.domains.member.dto.response.MemberMapResDTO;
@@ -19,8 +21,11 @@ import com.CPGroupH.error.exception.CustomException;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
@@ -30,6 +35,7 @@ public class MemberServiceImpl implements MemberService {
     private final VisitedRepository visitedRepository;
     private final LikeMapper likeMapper;
     private final VisitedMapper visitedMapper;
+    private final SubCategoryRepository subCategoryRepository;
 
     public Member findMemberByNickname(String nickname) {
         return memberRepository.findMemberByNickname(nickname)
@@ -72,11 +78,14 @@ public class MemberServiceImpl implements MemberService {
         }
     }
 
-    public void addMemberCategory(CategoryReqDTO categoryReqDTO, Long id){
+    @Transactional
+    public void addMemberPreference(CategoryReqDTO categoryReqDTO, Long id){
         Member member = memberRepository.findById(id)
                 .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
+        log.warn("{}",member.getPreferences());
+        List<SubCategory> subCategories = subCategoryRepository.findAllById(categoryReqDTO.categoryIds());
 
-        member.updateCategoies(categoryReqDTO.categoryIds());
+        member.addPreferences(subCategories);
         member.updateAllowance();
     }
 

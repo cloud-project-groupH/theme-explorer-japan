@@ -11,12 +11,9 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface PlaceMapper {
 
-    @Mapping(target = "imageUrl", source = "imageKey")
     List<PopularPlaceResDTO> toPopularPlaceResDTO(List<Place> places);
 
-    @Mapping(target = "imageUrl", source = "imageKey")
     List<PersonalPlaceResDTO> toPersonalPlaceResDTO(List<Place> places);
 
-    @Mapping(target = "imageUrl", source = "imageKey")
     List<SearchPlaceResDTO> toSearchPlaceResDTO(List<Place> places);
 }

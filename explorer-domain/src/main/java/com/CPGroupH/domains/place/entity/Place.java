@@ -53,8 +53,8 @@ public class Place extends BaseEntity {
     private String longitude;
 
     //S3
-    @Column
-    private String imageKey;
+    @Column(name = "image_key", nullable = false)
+    private String imageUrl;
 
     @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Recommendation> recommendations = new ArrayList<>();
@@ -68,7 +68,7 @@ public class Place extends BaseEntity {
         this.visited = visited;
         this.latitude = latitude;
         this.longitude = longitude;
-        this.imageKey = imageKey;
+        this.imageUrl = imageKey;
     }
 
     public void increaseLikes(Place place) {
