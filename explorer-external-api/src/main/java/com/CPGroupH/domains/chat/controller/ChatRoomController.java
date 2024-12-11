@@ -16,6 +16,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -45,7 +47,7 @@ public class ChatRoomController {
 
     @PostMapping
     public ResponseEntity<SuccessResponse<ChatRoom>> createChatRoom(@RequestBody CreateChatRoomReqDTO request) {
-        ChatRoom chatRoom = chatRoomService.createChatRoom(request.title(), request.travelDate());
+        ChatRoom chatRoom = chatRoomService.createChatRoom(request.title(), request.travelDate(), request.placeIds());
         return ResponseFactory.created(chatRoom);
     }
 
@@ -53,5 +55,11 @@ public class ChatRoomController {
     public ResponseEntity<Void> deleteChatRoom(@PathVariable Long id) {
         chatRoomService.deleteChatRoom(id);
         return ResponseFactory.noContent();
+    }
+
+    @GetMapping("/by-place/{placeId}")
+    public ResponseEntity<SuccessResponse<List<ChatRoom>>> getChatRoomsByPlace(@PathVariable Long placeId) {
+        List<ChatRoom> chatRooms = chatRoomService.getChatRoomsByPlace(placeId);
+        return ResponseFactory.success(chatRooms);
     }
 }
