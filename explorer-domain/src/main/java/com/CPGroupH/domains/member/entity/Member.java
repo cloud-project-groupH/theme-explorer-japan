@@ -32,7 +32,8 @@ public class Member extends BaseEntity {
 
     private String profileImage;
 
-    private Boolean allowance;
+    @Column(nullable = false)
+    private Boolean allowance = false;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 10)
@@ -46,6 +47,9 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Visited> visited = new ArrayList<>();
+
+    @ElementCollection
+    private List<Long> subcategories = new ArrayList<>();
 
     @Builder
     public Member(String nickname, String email, String profileImage, Boolean allowance, MemberRole role) {
@@ -63,6 +67,10 @@ public class Member extends BaseEntity {
 
     public void updateAllowance() {
         this.allowance = true;
+    }
+
+    public void updateCategoies(List<Long> categories) {
+        this.subcategories.addAll(categories);
     }
 }
 

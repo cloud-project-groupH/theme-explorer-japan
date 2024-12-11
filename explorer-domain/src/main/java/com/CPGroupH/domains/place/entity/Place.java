@@ -2,6 +2,7 @@ package com.CPGroupH.domains.place.entity;
 
 import com.CPGroupH.domains.address.entity.Address;
 import com.CPGroupH.domains.common.entity.BaseEntity;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -9,8 +10,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -33,6 +37,9 @@ public class Place extends BaseEntity {
     @Column(nullable = false)
     private String title;
 
+    @Column
+    private String description;
+
     @Column(nullable = false)
     private Integer likes;
 
@@ -45,14 +52,23 @@ public class Place extends BaseEntity {
     @Column(nullable = false)
     private String longitude;
 
+    //S3
+    @Column
+    private String imageKey;
+
+    @OneToMany(mappedBy = "place", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Recommendation> recommendations = new ArrayList<>();
+
     @Builder
-    public Place(Address address, String title, Integer likes, Integer visited, String latitude, String longitude) {
+    public Place(Address address, String title, String description, Integer likes, Integer visited, String latitude, String longitude, String imageKey) {
         this.address = address;
         this.title = title;
+        this.description = description;
         this.likes = likes;
         this.visited = visited;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.imageKey = imageKey;
     }
 
     public void increaseLikes(Place place) {

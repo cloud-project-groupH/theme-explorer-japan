@@ -2,9 +2,14 @@ spring:
   data:
     redis:
       host: localhost
-      port: 6378
+      port: 6380
       password: isshoni7
       timeout: 2000
+
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
 
   security:
     oauth2:
@@ -37,9 +42,22 @@ cookie:
   refresh-name: rf_t
 
 frontend:
-  auth-redirect-url: http://localhost:3000/loading
-  base-url: http://localhost:3000
-  allowance-redirect-url: http://localhost:3000/login/term
+  auth-redirect-url: http://localhost:49894/loading
+  base-url: http://localhost:49894
+  allowance-redirect-url: http://localhost:49894/login/term
 
 backend:
   base-url: http://localhost:8080
+
+cloud:
+  aws:
+    s3:
+      bucketName: isshoni-s3
+    region:
+      static: ap-northeast-2
+      auto: false
+    stack:
+      auto: false
+    credentials:
+      access-key: AKIAUTPKJLNDYEAG2W4T
+      secret-key: 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

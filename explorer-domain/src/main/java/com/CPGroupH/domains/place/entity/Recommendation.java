@@ -1,5 +1,6 @@
 package com.CPGroupH.domains.place.entity;
 
+import com.CPGroupH.domains.category.entity.SubCategory;
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -17,8 +18,9 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name="images")
-public class Image extends BaseEntity {
+@Table(name = "recommendations")
+public class Recommendation extends BaseEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,8 +29,14 @@ public class Image extends BaseEntity {
     @JoinColumn(name = "place_id", nullable = false)
     private Place place;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subcategory_id", nullable = false)
+    private SubCategory subCategory;
+
+
     @Builder
-    public Image(Place place) {
+    public Recommendation(Place place, SubCategory subCategory) {
         this.place = place;
+        this.subCategory = subCategory;
     }
 }

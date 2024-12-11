@@ -69,11 +69,14 @@ public class JwtService {
     }
 
     public String createAccessToken(Long memberId) {
-        return createToken(memberId, accessTokenExpiresIn, accessTokenSecretKey);
+        String accessToken = createToken(memberId, accessTokenExpiresIn, accessTokenSecretKey);
+        log.warn("createAccessToken: {}", accessToken);
+        return accessToken;
     }
 
     public String createRefreshToken(Long memberId) {
         String refreshToken = createToken(memberId, refreshTokenExpiresIn, refreshTokenSecretKey);
+        log.warn("createRefreshToken: {}", refreshToken);
         redisAuthService.setRefreshToken(memberId, refreshToken, refreshTokenExpiresIn);
         return refreshToken;
     }
@@ -96,6 +99,7 @@ public class JwtService {
 
     public Member getMemberFromAccessToken(String accessToken) {
         Long memberId = getMemberIdFromAccessToken(accessToken);
+        log.debug("getMemberFromAccessToken: {}", memberId);
         return memberRepository.findById(memberId).orElseThrow(() -> {
             return new CustomException(AuthErrorCode.USER_NOT_EXIST);
         });
