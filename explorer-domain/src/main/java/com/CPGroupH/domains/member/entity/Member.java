@@ -1,6 +1,8 @@
 package com.CPGroupH.domains.member.entity;
 
 import com.CPGroupH.common.enums.MemberRole;
+import com.CPGroupH.domains.category.entity.Preference;
+import com.CPGroupH.domains.category.entity.SubCategory;
 import com.CPGroupH.domains.common.entity.BaseEntity;
 import com.CPGroupH.domains.place.entity.Like;
 import com.CPGroupH.domains.place.entity.Visited;
@@ -48,8 +50,8 @@ public class Member extends BaseEntity {
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Visited> visited = new ArrayList<>();
 
-    @ElementCollection
-    private List<Long> subcategories = new ArrayList<>();
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Preference> preferences = new ArrayList<>();
 
     @Builder
     public Member(String nickname, String email, String profileImage, Boolean allowance, MemberRole role) {
@@ -68,9 +70,15 @@ public class Member extends BaseEntity {
     public void updateAllowance() {
         this.allowance = true;
     }
-
-    public void updateCategoies(List<Long> categories) {
-        this.subcategories.addAll(categories);
+    public void addPreferences(List<SubCategory> categories) {
+        if (categories == null || categories.isEmpty()) {
+            return;
+        }
+        for (SubCategory category : categories) {
+            if (this.preferences.stream().noneMatch(pref -> pref.getCategory().equals(category))) {
+                this.preferences.add(new Preference(this, category));
+            }
+        }
     }
 }
 

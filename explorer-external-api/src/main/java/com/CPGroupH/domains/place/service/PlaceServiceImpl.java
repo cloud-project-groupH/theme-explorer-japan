@@ -17,9 +17,11 @@ import com.CPGroupH.error.code.PlaceErrorCode;
 import com.CPGroupH.error.exception.CustomException;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class PlaceServiceImpl implements PlaceService {
@@ -65,6 +67,7 @@ public class PlaceServiceImpl implements PlaceService {
      */
     public List<PopularPlaceResDTO> popularPlace(){
         List<Place> popularList = placeRepository.findTop5ByOrderByLikesDesc();
+        log.warn("popular list: {}", popularList);
         return placeMapper.toPopularPlaceResDTO(popularList);
     }
 
@@ -75,7 +78,12 @@ public class PlaceServiceImpl implements PlaceService {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new CustomException(MemberErrorCode.MEMBER_NOT_FOUND));
 
-        List<Place> places = placeRepository.findPlacesBySubcategories(member.getSubcategories());
+        List<Long> subCategoryIds = member.getPreferences().stream()
+                .map(preference -> preference.getCategory().getId())
+                .toList();
+        log.warn("subCategoryIds: {}", subCategoryIds);
+        List<Place> places = placeRepository.findPlacesBySubcategories(subCategoryIds);
+
         return placeMapper.toPersonalPlaceResDTO(places);
     }
 

@@ -1,4 +1,7 @@
 spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
   data:
     redis:
       host: localhost
@@ -42,9 +45,9 @@ cookie:
   refresh-name: rf_t
 
 frontend:
-  auth-redirect-url: http://localhost:49894/loading
-  base-url: http://localhost:49894
-  allowance-redirect-url: http://localhost:49894/login/term
+  auth-redirect-url: http://localhost:58006/loading
+  base-url: http://localhost:58006
+  allowance-redirect-url: http://localhost:58006/login/term
 
 backend:
   base-url: http://localhost:8080

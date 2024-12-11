@@ -8,6 +8,7 @@ import com.CPGroupH.domains.place.service.PlaceService;
 import com.CPGroupH.response.ResponseFactory;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/places")
@@ -38,13 +40,16 @@ public class PlaceController {
 
     @GetMapping("/popular")
     public ResponseEntity<List<PopularPlaceResDTO>> getPopularPlaces(@AuthenticationPrincipal CustomOAuth2User user) {
+        log.warn("Get popular places{}", user.getMemberId());
         List<PopularPlaceResDTO> response = placeService.popularPlace();
+        log.info("Popular places: {}", response);
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/personal")
     public ResponseEntity<List<PersonalPlaceResDTO>> getPersonalPlaces(@AuthenticationPrincipal CustomOAuth2User user) {
         List<PersonalPlaceResDTO> response = placeService.personalPlace(user.getMemberId());
+        log.info("Personal places: {}", response);
         return ResponseEntity.ok(response);
     }
 

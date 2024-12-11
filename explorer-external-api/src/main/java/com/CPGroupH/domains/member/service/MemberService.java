@@ -14,6 +14,6 @@ public interface MemberService {
     MemberMapResDTO findMapByMemberId(Long id);
     Boolean hasCompletedAllowance(String email);
     void updateAllowance(String email);
-    void addMemberCategory(CategoryReqDTO categoryReqDTO, Long id);
+    void addMemberPreference(CategoryReqDTO categoryReqDTO, Long id);
     MemberResDTO findMemberById(Long id);
 }
