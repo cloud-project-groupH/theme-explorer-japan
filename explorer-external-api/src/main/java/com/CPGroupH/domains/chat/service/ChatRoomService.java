@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public interface ChatRoomService {
     ChatRoom findChatRoomById(String id);
@@ -13,7 +14,9 @@ public interface ChatRoomService {
 
     Page<ChatRoom> getAllChatRooms(Pageable pageable);
 
-    ChatRoom createChatRoom(String title, LocalDateTime travelDate);
+    ChatRoom createChatRoom(String title, LocalDateTime travelDate, List<Long> placeIds);
+
+    List<ChatRoom> getChatRoomsByPlace(Long placeId);
 
     void deleteChatRoom(Long chatRoomId);
 }
